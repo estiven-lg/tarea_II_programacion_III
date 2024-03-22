@@ -22,7 +22,8 @@ public class Sorter {
         return numbers;
 
 	}
-	public static double[] bubble(double[] numbers) {
+	
+    public static double[] bubble(double[] numbers) {
         for (int I = numbers.length - 1; I > 0; I--) {
             for (int II = 0; II < I; II++) {
                 double rightNum = numbers[II], leftNum = numbers[II + 1];
@@ -35,6 +36,20 @@ public class Sorter {
         return numbers;
     }
 
+    public static double[] insertion(double[] numbers) {
+        for (int I = 1; I < numbers.length; I++) {
+            for (int II = I; II > 0; II--) {
+                double rightNum = numbers[II - 1], leftNum = numbers[II];
+                if (leftNum < rightNum) {
+                    numbers[II - 1] = leftNum;
+                    numbers[II] = rightNum;
+                }
+
+            }
+        }
+        return numbers;
+    }
+    
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
 
