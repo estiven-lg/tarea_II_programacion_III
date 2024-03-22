@@ -22,6 +22,18 @@ public class Sorter {
         return numbers;
 
 	}
+	public static double[] bubble(double[] numbers) {
+        for (int I = numbers.length - 1; I > 0; I--) {
+            for (int II = 0; II < I; II++) {
+                double rightNum = numbers[II], leftNum = numbers[II + 1];
+                if (rightNum > leftNum) {
+                    numbers[II] = leftNum;
+                    numbers[II + 1] = rightNum;
+                }
+            }
+        }
+        return numbers;
+    }
 
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
