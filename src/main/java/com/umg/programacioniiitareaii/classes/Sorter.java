@@ -21,7 +21,7 @@ public class Sorter {
         }
         return numbers;
 
-    }
+	}
 
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
