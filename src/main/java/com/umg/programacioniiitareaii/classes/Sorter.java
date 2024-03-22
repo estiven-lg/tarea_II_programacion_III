@@ -50,6 +50,24 @@ public class Sorter {
         return numbers;
     }
     
+    public static double[] merge(double[] numbers) {
+        int n = numbers.length;
+
+        if (n == 1) {
+            return numbers;
+        }
+
+        if (n == 2) {
+            double leftNum = numbers[0], rightNum = numbers[1];
+            if (leftNum > rightNum) {
+                numbers[0] = rightNum;
+                numbers[1] = leftNum;
+            }
+
+           return numbers;
+        }
+    }
+    
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
 
