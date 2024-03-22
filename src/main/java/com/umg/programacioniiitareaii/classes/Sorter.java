@@ -4,7 +4,24 @@ import java.util.Arrays;
 
 public class Sorter {
 
-  //otravez io
+	public static double[] selection(double[] numbers) {
+
+        for (int I = 0; I < numbers.length; I++) {
+            double temp = numbers[I];
+            int minPosition = I;
+
+            for (int II = I; II < numbers.length; II++) {
+                if (numbers[II] < numbers[minPosition]) {
+                    minPosition = II;
+                }
+            }
+
+            numbers[I] = numbers[minPosition];
+            numbers[minPosition] = temp;
+        }
+        return numbers;
+
+    }
 
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
