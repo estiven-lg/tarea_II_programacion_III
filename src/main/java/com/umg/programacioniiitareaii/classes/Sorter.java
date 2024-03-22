@@ -108,7 +108,7 @@ public class Sorter {
         return numbers;
     }
     
-    int halfPoint = (int) Math.ceil( n / 2.0);
+    int halfPoint = (int) Math.ceil(n / 2.0);
 
     double[] leftArray = Sorter.merge(Arrays.copyOfRange(numbers, 0, halfPoint));
     double[] rightArray = Sorter.merge(Arrays.copyOfRange(numbers, halfPoint, n));
@@ -144,6 +144,7 @@ public class Sorter {
             i++;
             continue;
         }
+    }
 
     return numbers;
 }
