@@ -66,7 +66,89 @@ public class Sorter {
 
            return numbers;
         }
+  
+        int halfPoint = (int) Math.ceil(n / 2.0);
+
+        double[] leftArray = Sorter.merge(Arrays.copyOfRange(numbers, 0, halfPoint));
+        double[] rightArray = Sorter.merge(Arrays.copyOfRange(numbers, halfPoint, n));
+
+        int l = 0, r = 0, i = 0;
+
+        while (l < leftArray.length || r < rightArray.length) {
+
+            if (l == leftArray.length) {
+                numbers[i] = rightArray[r];
+                r++;
+                i++;
+                continue;
+            }
+
+            if (r == rightArray.length) {
+                numbers[i] = leftArray[l];
+                l++;
+                i++;
+                continue;
+            }
+
+            if (leftArray[l] <= rightArray[r]) {
+                numbers[i] = leftArray[l];
+                l++;
+                i++;
+                continue;
+            }
+
+            if (rightArray[r] <= leftArray[l]) {
+                numbers[i] = rightArray[r];
+                r++;
+                i++;
+                continue;
+            }
+        }
+
+        return numbers;
     }
+    
+    int halfPoint = (int) Math.ceil( n / 2.0);
+
+    double[] leftArray = Sorter.merge(Arrays.copyOfRange(numbers, 0, halfPoint));
+    double[] rightArray = Sorter.merge(Arrays.copyOfRange(numbers, halfPoint, n));
+
+    int l = 0, r = 0, i = 0;
+
+    while (l < leftArray.length || r < rightArray.length) {
+
+        if (l == leftArray.length) {
+            numbers[i] = rightArray[r];
+            r++;
+            i++;
+            continue;
+        }
+
+        if (r == rightArray.length) {
+            numbers[i] = leftArray[l];
+            l++;
+            i++;
+            continue;
+        }
+
+        if (leftArray[l] <= rightArray[r]) {
+            numbers[i] = leftArray[l];
+            l++;
+            i++;
+            continue;
+        }
+
+        if (rightArray[r] <= leftArray[l]) {
+            numbers[i] = rightArray[r];
+            r++;
+            i++;
+            continue;
+        }
+    }
+
+    return numbers;
+}
+
     
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
