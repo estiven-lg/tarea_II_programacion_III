@@ -144,7 +144,6 @@ public class Sorter {
             i++;
             continue;
         }
-    }
 
     return numbers;
 }
