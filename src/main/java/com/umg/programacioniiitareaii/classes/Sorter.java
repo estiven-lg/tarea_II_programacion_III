@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Sorter {
 
-  
+  //otravez io
 
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
