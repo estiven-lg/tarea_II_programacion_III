@@ -1,10 +1,12 @@
 package com.umg.programacioniiitareaii.classes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Sorter {
 
-	public static double[] selection(double[] numbers) {
+    public static double[] selection(double[] numbers) {
 
         for (int I = 0; I < numbers.length; I++) {
             double temp = numbers[I];
@@ -21,8 +23,8 @@ public class Sorter {
         }
         return numbers;
 
-	}
-	
+    }
+
     public static double[] bubble(double[] numbers) {
         for (int I = numbers.length - 1; I > 0; I--) {
             for (int II = 0; II < I; II++) {
@@ -49,7 +51,21 @@ public class Sorter {
         }
         return numbers;
     }
-    
+
+    private static List<Double> insertion(List<Double> numbers) {
+        for (int I = 1; I < numbers.size(); I++) {
+            for (int II = I; II > 0; II--) {
+                double rightNum = numbers.get(II - 1), leftNum = numbers.get(II);
+                if (leftNum < rightNum) {
+                    numbers.set(II - 1, leftNum);
+                    numbers.set(II, rightNum);
+                }
+
+            }
+        }
+        return numbers;
+    }
+
     public static double[] merge(double[] numbers) {
         int n = numbers.length;
 
@@ -64,9 +80,9 @@ public class Sorter {
                 numbers[1] = leftNum;
             }
 
-           return numbers;
+            return numbers;
         }
-  
+
         int halfPoint = (int) Math.ceil(n / 2.0);
 
         double[] leftArray = Sorter.merge(Arrays.copyOfRange(numbers, 0, halfPoint));
@@ -107,49 +123,7 @@ public class Sorter {
 
         return numbers;
     }
-    
-    int halfPoint = (int) Math.ceil(n / 2.0);
 
-    double[] leftArray = Sorter.merge(Arrays.copyOfRange(numbers, 0, halfPoint));
-    double[] rightArray = Sorter.merge(Arrays.copyOfRange(numbers, halfPoint, n));
-
-    int l = 0, r = 0, i = 0;
-
-    while (l < leftArray.length || r < rightArray.length) {
-
-        if (l == leftArray.length) {
-            numbers[i] = rightArray[r];
-            r++;
-            i++;
-            continue;
-        }
-
-        if (r == rightArray.length) {
-            numbers[i] = leftArray[l];
-            l++;
-            i++;
-            continue;
-        }
-
-        if (leftArray[l] <= rightArray[r]) {
-            numbers[i] = leftArray[l];
-            l++;
-            i++;
-            continue;
-        }
-
-        if (rightArray[r] <= leftArray[l]) {
-            numbers[i] = rightArray[r];
-            r++;
-            i++;
-            continue;
-        }
-    }
-
-    return numbers;
-}
-
-    
     public static double[] quick(double[] numbers) {
         int n = numbers.length;
 
@@ -240,5 +214,97 @@ public class Sorter {
         }
         return numbers;
 
+    }
+
+    public static int[] count(int[] numbers) {
+        int N = numbers.length;
+        int max = numbers[0];
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] > max) {
+                max = numbers[i];
+            }
+        }
+
+        int[] countArray = new int[max + 1];
+
+        for (int i = 0; i < N; i++) {
+            countArray[numbers[i]]++;
+        }
+
+        for (int i = 1; i <= max; i++) {
+            countArray[i] += countArray[i - 1];
+        }
+
+        int[] outputArray = new int[N];
+
+        for (int i = N - 1; i >= 0; i--) {
+            outputArray[countArray[numbers[i]] - 1] = numbers[i];
+            countArray[numbers[i]]--;
+        }
+
+        return outputArray;
+    }
+
+    static public int[] radix(int numbers[]) {
+        int n = numbers.length;
+        int max = numbers[0];
+        for (int i = 1; i < n; i++) {
+            if (numbers[i] > max) {
+                max = numbers[i];
+            }
+        }
+
+        for (int III = 1; max / III > 0; III *= 10) {
+            for (int II = 0; II < n - 1; II++) {
+
+                int min_idx = II;
+                for (int I = II + 1; I < n; I++) {
+                    if (numbers[I] / III < numbers[min_idx] / III) {
+                        min_idx = I;
+                    }
+                }
+
+                int temp = numbers[min_idx];
+                numbers[min_idx] = numbers[II];
+                numbers[II] = temp;
+            }
+        }
+        return numbers;
+    }
+
+    public static double[] bucket(double[] numbers) {
+        int n = numbers.length;
+        int max = (int) numbers[0];
+        for (int i = 1; i < n; i++) {
+            if (numbers[i] > max) {
+                max = (int) numbers[i];
+            }
+        }
+
+        int divisor = (int) Math.pow(10, Math.log10(max) + 1);
+
+        List<Double>[] buckets = new ArrayList[n];
+
+        for (int i = 0; i < n; i++) {
+            buckets[i] = new ArrayList<>();
+        }
+
+        for (int i = 0; i < n; i++) {
+            int bi = (int) (n * (numbers[i] / divisor));
+            buckets[bi].add(numbers[i]);
+        }
+
+        for (int i = 0; i < n; i++) {
+            buckets[i] = Sorter.insertion(buckets[i]);
+        }
+
+        // 4) Concatenate all buckets into numbers[]
+        int index = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < buckets[i].size(); j++) {
+                numbers[index++] = buckets[i].get(j);
+            }
+        }
+        return numbers;
     }
 }
